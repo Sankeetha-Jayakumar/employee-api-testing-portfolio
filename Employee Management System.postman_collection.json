@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "09409036-6324-4205-ba07-695875b1bb69",
+		"name": "Employee Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11527099",
+		"_collection_link": "https://learning-2841.postman.co/workspace/Learning-Workspace~ef358b2c-2222-40b4-9a5c-b1d539821737/collection/11527099-09409036-6324-4205-ba07-695875b1bb69?action=share&source=collection_link&creator=11527099"
+	},
+	"item": [
+		{
+			"name": "Create Multiple Employees",
+			"item": [
+				{
+					"name": "DatafromJson",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{id}}\",\n    \"first_name\": \"{{first_name}}\",\n    \"last_name\": \"{{last_name}}\",\n    \"email\": \"{{email}}\",\n    \"age\": {{age}}\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Datafromcsv",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    console.log(pm.response.code)",
+									"});",
+									"pm.test(\"Body contains role\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.iterationData.get(\"role\"));",
+									"    console.log(pm.iterationData.get(\"role\"))",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{name}}\",\n    \"role\": \"{{role}}\",\n    \"age\": {{age}}\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get all the Employees",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"verify status code 200\", function(){",
+							"    pm.response.to.have.status(200)",
+							"});",
+							"",
+							"pm.test(\"Verify status code using expect\", function(){",
+							"    pm.expect(pm.response.code).to.eql(200)",
+							"});",
+							"pm.test(\"Assert status message OK\", ()=>{",
+							"    pm.response.to.have.status(\"OK\")",
+							"});",
+							"pm.test(\"Assert OK using expect\", ()=>{",
+							"    pm.expect(pm.response.status).to.equal(\"OK\")",
+							"});",
+							"",
+							"pm.test(\"Assert first name is Sanna\", ()=>{",
+							"    var jsonResponse = pm.response.json()",
+							"    pm.expect(jsonResponse[4].email).to.eql(\"Sanna@gmail.com\")",
+							"});",
+							"",
+							"pm.test(\"Check if Sannachittuu is present in the response\", ()=>{",
+							"    pm.expect(pm.response.text()).to.include(\"Sannachittuu\")",
+							"});",
+							"",
+							"// below code wrote using snippets ",
+							"pm.test(\"Check if id 7 is present\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[6].id).to.eql(\"7\");",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Assert firt name is Shreya\", ()=>{",
+							"    var jsonResponse = pm.response.json()",
+							"    pm.expect(jsonResponse[1].first_name).to.equal(\"Shreya\")",
+							"})",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"string_you_want_to_search\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new Employee",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"8\",\n    \"first_name\": \"Jay\",\n    \"last_name\": \"Spartan\",\n    \"email\": \"Jayspa@gmail.com\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employee information",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": \"6\",\n        \"first_name\": \"Sanna\",\n        \"last_name\": \"JS\",\n        \"email\": \"Sanna@gmail.com\"\n    }\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Employee information",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": \"6\",\n        \"first_name\": \"Sanna\",\n        \"last_name\": \"Jayakumar\",\n        \"email\": \"Sanna@gmail.com\"\n    }\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
