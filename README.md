@@ -1,13 +1,13 @@
-# qa-api-testing-portfolio
+# employee-api-testing-portfolio
 API testing project using Postman including test cases and documentation
 QA API Testing Portfolio
 
 This project demonstrates API testing using Postman.
 
 Tested APIs:
-- Create New User
-- Update User 
-- Delete User
+- Create New Employee
+- Update Employee 
+- Delete Employee
 - Create Employee on Local Json Server
 - Create Multiple Employees using Json & CSV File
 - Get Parameters
